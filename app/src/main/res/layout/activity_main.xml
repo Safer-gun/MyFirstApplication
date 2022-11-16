@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button1"
+        android:textSize="25sp"
+        android:background="#0000"
+        android:textColor="#0044ff"
+        android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/btn_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button2"
+        android:textSize="25sp"
+        android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/btn_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EditText"
+        android:textSize="25sp"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        android:textSize="25sp"
+        android:textAllCaps="false" />
+    <TextView
+        android:id="@+id/text_view_hello_world"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/textview"
+        android:gravity="center"
+        android:textColor="#FF6600"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/btn_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        android:textSize="25dp"
+        android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/btn_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RecyclerView"
+        android:textAllCaps="false"
+        android:textSize="25sp"/>
+</LinearLayout>
