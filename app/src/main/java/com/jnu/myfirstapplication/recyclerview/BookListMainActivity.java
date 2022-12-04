@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.jnu.myfirstapplication.BaiduMapFragment;
 import com.jnu.myfirstapplication.BookListFragment;
 import com.jnu.myfirstapplication.BrowserFragment;
 import com.jnu.myfirstapplication.CheckBoxActivity;
@@ -59,6 +60,8 @@ public class PageViewFragmentAdapter extends FragmentStateAdapter{
                                 return BookListFragment.newInstance();
                         case 1:
                                 return BrowserFragment.newInstance();
+                        case 2:
+                                return BaiduMapFragment.newInstance();
                 }
                 return BookListFragment.newInstance();
         }
