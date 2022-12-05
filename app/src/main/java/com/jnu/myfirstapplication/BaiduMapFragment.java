@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,10 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.jnu.myfirstapplication.recyclerview.HttpDataLoder;
+import com.jnu.myfirstapplication.recyclerview.ShopLocation;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,15 +67,42 @@ public class BaiduMapFragment extends Fragment {
         LatLng cenpt=new LatLng(22.255925,113.541112);
         MapStatus mapStatus=new MapStatus.Builder().target(cenpt).zoom(18).build();
         mapView.getMap().setMapStatus(MapStatusUpdateFactory.newMapStatus(mapStatus));
-        BitmapDescriptor bitmap= BitmapDescriptorFactory.fromResource(R.drawable.book_no_name);
-        OverlayOptions options=new MarkerOptions().position(cenpt).icon(bitmap);
-        mapView.getMap().addOverlay(options);
-        mapView.getMap().addOverlay(new TextOptions().bgColor(0xAAFFFF00)
-                .fontSize(25)
-                .fontColor(0xFFFF00FF).text("暨南大学").position(cenpt));
-        
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpDataLoder dataLoder=new HttpDataLoder();
+                String shopJsonData= dataLoder.getHttpData("http://file.nidama.net/class/mobile_develop/data/bookstore2022.json");
+                List<ShopLocation> locations=dataLoder.ParseJsonData(shopJsonData);
+                BaiduMapFragment.this.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AddMarkersOnMap(locations, cenpt);
+                    }
+                });
+
+            }
+        }).start();
+
+
         return rootView;
     }
+
+    private void AddMarkersOnMap(List<ShopLocation> locations, LatLng cenpt) {
+        BitmapDescriptor bitmap= BitmapDescriptorFactory.fromResource(R.drawable.book_no_name);
+
+        for(ShopLocation shopLocation: locations){
+            LatLng shopPoint=new LatLng(shopLocation.getLatitude(), shopLocation.getLongitude());
+
+
+            OverlayOptions options=new MarkerOptions().position(cenpt).icon(bitmap);
+            mapView.getMap().addOverlay(options);
+            mapView.getMap().addOverlay(new TextOptions().bgColor(0xAAFFFF00)
+                    .fontSize(32)
+                    .fontColor(0xFFFF00FF).text(shopLocation.getName()).position(shopPoint));
+        }
+    }
+
     public void onResume() {
         super.onResume();
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
