@@ -73,4 +73,8 @@ public class Spriter {
     public void setDirection(float direction) {
         this.direction = direction;
     }
+
+    public boolean isTouched(float touchedx, float touchedY) {
+        return (touchedx-x)*(touchedx-x)+(touchedY-y)*(touchedY-y)<=4000000;
+    }
 }
