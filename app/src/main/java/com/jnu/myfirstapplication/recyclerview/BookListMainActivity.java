@@ -30,6 +30,7 @@ import com.jnu.myfirstapplication.BookListFragment;
 import com.jnu.myfirstapplication.BrowserFragment;
 import com.jnu.myfirstapplication.CheckBoxActivity;
 import com.jnu.myfirstapplication.EditBookActivity;
+import com.jnu.myfirstapplication.GameFragment;
 import com.jnu.myfirstapplication.R;
 import com.jnu.myfirstapplication.data.DataSaver;
 
@@ -62,13 +63,15 @@ public class PageViewFragmentAdapter extends FragmentStateAdapter{
                                 return BrowserFragment.newInstance();
                         case 2:
                                 return BaiduMapFragment.newInstance();
+                        case 3:
+                                return GameFragment.newInstance();
                 }
                 return BookListFragment.newInstance();
         }
 
         @Override
         public int getItemCount() {
-                return 3;
+                return 4;
         }
 }
 protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,9 @@ protected void onCreate(Bundle savedInstanceState) {
                                         break;
                                 case 2:
                                         tab.setText("卖家");
+                                        break;
+                                case 3:
+                                        tab.setText("游戏");
                                         break;
                         }
                 }
